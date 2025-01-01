@@ -8,6 +8,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -37,7 +42,7 @@ public class DatabaseConnection {
      * Método para la creación de la bases de datos.
      * @param dbname 
      */
-    public static void createDatabase(String dbname){
+    public void createDatabase(String dbname){
         Connection conn = null;
         Statement stmt = null;
         
@@ -78,7 +83,7 @@ public class DatabaseConnection {
      * @param dbname
      * @param tbname 
      */
-    public static void createTableDatabase(String dbname, String tbname){
+    public void createTableDatabase(String dbname, String tbname){
         Connection conn = null;
         Statement stmt = null;
         
@@ -94,7 +99,7 @@ public class DatabaseConnection {
                     + "ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY," 
                     + "NUMERO_EXPEDIENTE VARCHAR(100) DEFAULT NULL," 
                     + "FECHA_ENTRADA DATE DEFAULT NULL," 
-                    + "TIEMPO_ESTIMADO_ALQUILER VARCHAR(50) DEFAULT NULL," 
+                    + "TIEMPO_ESTIMADO_ALQUILER INT DEFAULT NULL," 
                     + "CLIENTE_NOMBRE VARCHAR(100) DEFAULT NULL," 
                     + "CLIENTE_APELLIDOS VARCHAR(100) DEFAULT NULL," 
                     + "CLIENTE_TELEFONO VARCHAR(15) DEFAULT NULL," 
@@ -103,8 +108,8 @@ public class DatabaseConnection {
                     + "FACTURACION_NOMBRE_EMPRESA VARCHAR(100) DEFAULT NULL," 
                     + "VIVIENDA_IDENTIFICADOR VARCHAR(50) DEFAULT NULL," 
                     + "VIVIENDA_DIRECCION VARCHAR(200) DEFAULT NULL," 
-                    + "VIVIENDA_CODIGO_POSTAL VARCHAR(10) DEFAULT NULL," 
-                    + "VIVIENDA_METROS INT DEFAULT NULL," 
+                    + "VIVIENDA_CODIGO_POSTAL INT DEFAULT NULL," 
+                    + "VIVIENDA_METROS DECIMAL(10, 2) DEFAULT NULL," 
                     + "VIVIENDA_NUMERO_HABITACIONES INT DEFAULT NULL," 
                     + "VIVIENDA_NUMERO_BANOS INT DEFAULT NULL," 
                     + "VIVIENDA_CODIGO_REFERENCIA VARCHAR(50) DEFAULT NULL," 
@@ -150,7 +155,7 @@ public class DatabaseConnection {
      * @param conn 
      * @param stmt
      */
-    public static void selectDatabase(String dbname, Connection conn, Statement stmt){
+    public void selectDatabase(String dbname, Connection conn, Statement stmt){
         /**
          * Se encapsula el proceso con try/catch para evitar errores no controlados.
          */
@@ -171,7 +176,106 @@ public class DatabaseConnection {
      * @param dbname
      * @param tbname
      */
-    public static void insertValuesDatabase(String dbname, String tbname) {
+    public void insertValuesDatabase(String dbname, String tbname, Object[] data) throws ParseException {
+        Connection conn = null;
+        Statement stmt = null;
         
+        /**
+         * Se encapsula el proceso con try/catch para evitar errores no controlados.
+         */
+        try {
+            /**
+             * Se crea la estructura de insertado de datos.
+             */
+            String sql = "INSERT INTO " + tbname + "("
+                    + "ID, "
+                    + "NUMERO_EXPEDIENTE, "
+                    + "FECHA_ENTRADA, "
+                    + "TIEMPO_ESTIMADO_ALQUILER, "
+                    + "CLIENTE_NOMBRE, "
+                    + "CLIENTE_APELLIDOS, "
+                    + "CLIENTE_TELEFONO, "
+                    + "FACTURACION_NIF_DNI, "
+                    + "FACTURACION_TIPO_EMPRESA, "
+                    + "FACTURACION_NOMBRE_EMPRESA, "
+                    + "VIVIENDA_IDENTIFICADOR, "
+                    + "VIVIENDA_DIRECCION, "
+                    + "VIVIENDA_CODIGO_POSTAL, "
+                    + "VIVIENDA_METROS, "
+                    + "VIVIENDA_NUMERO_HABITACIONES, "
+                    + "VIVIENDA_NUMERO_BANOS, "
+                    + "VIVIENDA_CODIGO_REFERENCIA, "
+                    + "VIVIENDA_PRECIO, "
+                    + "VIVIENDA_OBSERVACIONES"
+                    + ") "
+                    + "VALUES (DEFAULT, ";
+            
+            
+            /**
+             * Aquí creo un conjunto de valores para realizar comprobaciones de valores numericos.
+             */
+            Set<Integer> valores_numericos = new HashSet<>();
+            valores_numericos.add(2);
+            valores_numericos.add(11);
+            valores_numericos.add(12);
+            valores_numericos.add(13);
+            valores_numericos.add(14);
+            valores_numericos.add(16);
+            
+            /**
+             * Bucle para definir los valores de la sentencia INSERT.
+             */
+            for (int x = 0; x < data.length; x++) {
+                if (x == data.length - 1) {
+                    sql += data[x] != null ? "'" + data[x] + "'" : "NULL";
+                } else {
+                    if (valores_numericos.contains(x)) {
+                        sql += data[x] != null ? data[x] + "," : "NULL,";
+                        
+                    } else if(x == 2){
+                        sql += data[x] != null ? "'" + data[x] + "'," : "NULL,";
+                        
+                    } else {
+                        sql += data[x] != null ? "'" + data[x] + "'," : "NULL,";
+                    }
+                }
+            }
+            
+            sql += ");";
+            
+            System.out.println(sql);
+            
+            conn = getConnection();
+            stmt = conn.createStatement();
+            
+            /**
+             * Seleccionado de base de datos.
+             */
+            selectDatabase(dbname, conn, stmt);
+            
+            /**
+             * Ejecutado de la sentencia sql.
+             */
+            stmt.executeUpdate(sql);
+            System.out.println("Datos en: " + dbname + "." + tbname);
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+            
+            /**
+             * Con finally me aseguro que pasará siempre por acá 
+             * y que cerrará la conexión y la declaración de ejecución del SQL.
+             */
+        } finally {
+            
+            /**
+            * Se encapsula el proceso con try/catch para evitar errores no controlados.
+            */
+            try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                System.err.println("Error al cerrar conexión de bases de datos: " + e.getMessage());
+            }
+        }
     }
 }

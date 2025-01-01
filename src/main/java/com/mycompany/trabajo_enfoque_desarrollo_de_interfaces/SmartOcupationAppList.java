@@ -4,16 +4,45 @@
  */
 package com.mycompany.trabajo_enfoque_desarrollo_de_interfaces;
 
+import com.toedter.calendar.JDateChooser;
+import java.util.Date;
+
 /**
  *
  * @author sebastiancamposrojas
  */
 public class SmartOcupationAppList extends javax.swing.JFrame {
+    /**
+     * Aquí declaro el JDateChooser_inicio y JDateChooser_fin como atributo de clase.
+     */
+    public JDateChooser dateChooser_inicio;
+    public JDateChooser dateChooser_fin;
 
     /**
      * Creates new form SmartOcupationAppMenu
      */
     public SmartOcupationAppList() {
+        /**
+         * Aquí agrego componente JDateChooser dateChooser_inicio.
+         */
+        dateChooser_inicio = new JDateChooser();
+        dateChooser_inicio.setBounds(189, 105, 150, 30);
+        dateChooser_inicio.setDate(new Date());
+        add(dateChooser_inicio);
+        
+        /**
+         * Aquí agrego componente JDateChooser dateChooser_fin.
+         */
+        dateChooser_fin = new JDateChooser();
+        dateChooser_fin.setBounds(550, 105, 150, 30);
+        dateChooser_fin.setDate(new Date());
+        add(dateChooser_fin);
+
+        /**
+         * Aquí desactivo el LayoutManager para usar coordenadas para posicionar elementos.
+         */
+        setLayout(null);
+        
         initComponents();
     }
 

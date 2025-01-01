@@ -35,26 +35,6 @@ public class Trabajo_enfoque_desarrollo_de_interfaces {
         app.setLocationRelativeTo(null);
         
         /**
-         * Aquí agrego componente JDateChooser.
-         */
-        JDateChooser dateChooser = new JDateChooser();
-        dateChooser.setBounds(223, 140, 150, 30);
-        dateChooser.setDate(new Date());
-        app.add(dateChooser);
-        
-        /**
-         * Aquí desactivo el LayoutManager para usar coordenadas absolutas.
-         */
-        app.setLayout(null);
-        
-        /**
-         * Aquí nos aseguramos de actualizar el contenedor 
-         * y no tener problemas de componentes no visibles como el JDateChooser.
-         */
-        app.revalidate();
-        app.repaint();
-        
-        /**
          * Aquí le obligo a mostrar la ventana.
          */
         app.setVisible(true);

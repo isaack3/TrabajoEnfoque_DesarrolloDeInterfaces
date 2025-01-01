@@ -5,19 +5,38 @@
 package com.mycompany.trabajo_enfoque_desarrollo_de_interfaces;
 
 import com.toedter.calendar.JDateChooser;
-import java.awt.FlowLayout;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author sebastiancamposrojas
  */
 public class SmartOcupationApp extends javax.swing.JFrame {
+    /**
+     * Aquí declaro el JDateChooser como atributo de clase.
+     */
+    public JDateChooser dateChooser;
 
     /**
      * Creates new form SmartOcupationApp
      */
     public SmartOcupationApp() {
+        /**
+         * Aquí agrego componente JDateChooser.
+         */
+        dateChooser = new JDateChooser();
+        dateChooser.setBounds(223, 98, 150, 30);
+        dateChooser.setDate(new Date());
+        add(dateChooser);
+
+        /**
+         * Aquí desactivo el LayoutManager para usar coordenadas para posicionar elementos.
+         */
+        setLayout(null);
+        
         initComponents();
     }
 
@@ -47,9 +66,10 @@ public class SmartOcupationApp extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -102,7 +122,7 @@ public class SmartOcupationApp extends javax.swing.JFrame {
         jLabel7.setBounds(new java.awt.Rectangle(100, 20, 50, 20));
 
         jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
-        jLabel9.setText("1.- Información de Cliente");
+        jLabel9.setText("2.- Información de Cliente");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -146,56 +166,68 @@ public class SmartOcupationApp extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField3KeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("Fecha entrada a la vivienda:");
         jLabel3.setBounds(new java.awt.Rectangle(100, 20, 50, 20));
 
         jLabel4.setText("Tiempo estimado de alquiler:");
         jLabel4.setBounds(new java.awt.Rectangle(100, 20, 50, 20));
 
-        jButton1.setText("Consultar Expediente");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Número de expediente:");
         jLabel2.setBounds(new java.awt.Rectangle(100, 20, 50, 20));
+
+        jLabel23.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel23.setText("1. Información de Expediente");
+
+        jLabel24.setText("Días");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(14, 14, 14))
-                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(19, 19, 19)))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel23))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addGap(14, 14, 14)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel24)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addGap(39, 39, 39)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -205,7 +237,7 @@ public class SmartOcupationApp extends javax.swing.JFrame {
         jLabel8.setBounds(new java.awt.Rectangle(100, 20, 50, 20));
 
         jLabel10.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
-        jLabel10.setText("2.- Información de Facturación");
+        jLabel10.setText("3.- Información de Facturación");
 
         jLabel11.setText("Tipo Empresa/Particular:");
 
@@ -226,11 +258,16 @@ public class SmartOcupationApp extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addComponent(jLabel11)
                             .addComponent(jLabel12))
-                        .addGap(36, 36, 36)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,13 +292,19 @@ public class SmartOcupationApp extends javax.swing.JFrame {
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
         jLabel13.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
-        jLabel13.setText("3.- Información de Vivienda");
+        jLabel13.setText("4.- Información de Vivienda");
 
         jLabel14.setText("Identificador:");
 
         jLabel15.setText("Dirección:");
 
         jLabel16.setText("Código Postal:");
+
+        jTextField11.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField11KeyTyped(evt);
+            }
+        });
 
         jLabel17.setText("Observaciones:");
 
@@ -271,13 +314,37 @@ public class SmartOcupationApp extends javax.swing.JFrame {
 
         jLabel18.setText("Metros:");
 
+        jTextField12.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField12KeyTyped(evt);
+            }
+        });
+
         jLabel19.setText("Número de Habitaciones:");
 
+        jTextField13.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField13KeyTyped(evt);
+            }
+        });
+
         jLabel20.setText("Número de Baños:");
+
+        jTextField14.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField14KeyTyped(evt);
+            }
+        });
 
         jLabel21.setText("Código de Ref:");
 
         jLabel22.setText("Precio €:");
+
+        jTextField16.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField16KeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -343,9 +410,9 @@ public class SmartOcupationApp extends javax.swing.JFrame {
                             .addComponent(jLabel16)
                             .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel18)
-                            .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel18))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
@@ -363,7 +430,7 @@ public class SmartOcupationApp extends javax.swing.JFrame {
                             .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel22))
                         .addGap(23, 23, 23)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -383,6 +450,11 @@ public class SmartOcupationApp extends javax.swing.JFrame {
         });
 
         jButton4.setText("Limpiar Datos");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -430,13 +502,13 @@ public class SmartOcupationApp extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -483,10 +555,6 @@ public class SmartOcupationApp extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         /**
         * Aquí obligo a ocultar la ventana actual.
@@ -503,33 +571,6 @@ public class SmartOcupationApp extends javax.swing.JFrame {
          */
         listado.setSize(767, 600);
         listado.setLocationRelativeTo(null);
-        
-        /**
-         * Aquí agrego componente JDateChooser dateChooser_inicio.
-         */
-        JDateChooser dateChooser_inicio = new JDateChooser();
-        dateChooser_inicio.setBounds(189, 105, 150, 30);
-        dateChooser_inicio.setDate(new Date());
-        // dateChooser_inicio.setVisible(true);
-        listado.add(dateChooser_inicio);
-        
-        /**
-         * Aquí agrego componente JDateChooser dateChooser_fin.
-         */
-        JDateChooser dateChooser_fin = new JDateChooser();
-        dateChooser_fin.setBounds(550, 105, 150, 30);
-        dateChooser_fin.setDate(new Date());
-        // dateChooser_fin.setVisible(true);
-        listado.add(dateChooser_fin);
-        
-        /**
-         * Aquí nos aseguramos de actualizar el contenedor 
-         * y no tener problemas de componentes no visibles como el JDateChooser.
-         */
-        listado.revalidate();
-        listado.repaint();
-        
-        // listado.setLayout(null);
 
         /**
         * Aquí le obligo a mostrar la ventana.
@@ -538,11 +579,165 @@ public class SmartOcupationApp extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // numero expediente
+        String numero_expediente = jTextField1.getText().length() > 0 ? jTextField1.getText() : null;
         
+        // fecha entrada alquiler
+        Date fecha_entrada_alquiler = dateChooser.getDate() != null ? dateChooser.getDate() : null; 
+        
+         // tiempo estimado de alquiler
+        int tiempo_estimado_alquiler = jTextField3.getText().length() > 0 ? Integer.parseInt(jTextField3.getText()) : null;
+        
+        // nombre cliente
+        String nombre_cliente = jTextField4.getText().length() > 0 ? jTextField4.getText() : null;
+        
+        // apellidos cliente
+        String apellidos_cliente = jTextField5.getText().length() > 0 ? jTextField5.getText() : null; 
+        
+        // telefono cliente
+        String telefono_cliente = jTextField6.getText().length() > 0 ? jTextField6.getText() : null; 
+        
+        // nif/dni empresa
+        String nif_dni_empresa = jTextField7.getText().length() > 0 ? jTextField7.getText() : null; 
+        
+        // tipo empresa
+        String tipo_empresa = jComboBox1.getSelectedItem().toString();
+        
+        // nombre empresa
+        String nombre_empresa = jTextField8.getText().length() > 0 ? jTextField8.getText() : null; 
+        
+        // identificador vivienda
+        String identificador_vivienda = jTextField9.getText().length() > 0 ? jTextField9.getText() : null; 
+        
+        // direccion vivienda
+        String direccion_vivienda = jTextField10.getText().length() > 0 ? jTextField10.getText() : null; 
+        
+        // codigo postal vivienda
+        int codigo_postal_vivienda = jTextField11.getText().length() > 0 ? Integer.parseInt(jTextField11.getText()) : null; 
+        
+        // metros vivienda
+        float metros_vivienda = jTextField12.getText().length() > 0 ? Float.parseFloat(jTextField12.getText()) : null; 
+        
+        // numero de habitaciones vivienda
+        int numero_habitaciones_vivienda = jTextField13.getText().length() > 0 ? Integer.parseInt(jTextField13.getText()) : null; 
+        
+        // numero de baños vivienda
+        int numero_banos_vivienda = jTextField14.getText().length() > 0 ? Integer.parseInt(jTextField14.getText()) : null; 
+        
+        // codigo referencia vivienda
+        String codigo_referencia_vivienda = jTextField15.getText().length() > 0 ? jTextField15.getText() : null; 
+        
+        // precio vivienda
+        float precio_vivienda = jTextField16.getText().length() > 0 ? Float.parseFloat(jTextField16.getText()) : null; 
+        
+        // observaciones vivienda
+        String observaciones_vivienda = jTextArea1.getText().length() > 0 ? jTextArea1.getText() : null;
+        
+        Object data[] = new Object[18];
+        data[0] = numero_expediente;
+        data[1] = fecha_entrada_alquiler; // tipo de dato bd : date
+        data[2] = tiempo_estimado_alquiler; // tipo de dato bd : int
+        data[3] = nombre_cliente;
+        data[4] = apellidos_cliente;
+        data[5] = telefono_cliente;
+        data[6] = nif_dni_empresa;
+        data[7] = tipo_empresa;
+        data[8] = nombre_empresa;
+        data[9] = identificador_vivienda;
+        data[10] = direccion_vivienda;
+        data[11] = codigo_postal_vivienda; // tipo de dato bd : int
+        data[12] = metros_vivienda; // tipo de dato bd : double
+        data[13] = numero_habitaciones_vivienda; // tipo de dato bd : int
+        data[14] = numero_banos_vivienda; // tipo de dato bd : int
+        data[15] = codigo_referencia_vivienda;
+        data[16] = precio_vivienda; // tipo de dato bd : double
+        data[17] = observaciones_vivienda;
+        
+        /**
+         * Aquí creo la base de datos y la tabla de viviendas, en caso de no existir.
+         */
+        DatabaseConnection db = new DatabaseConnection();
+        try {
+            db.insertValuesDatabase(DatabaseConnection.DBNAME_SMARTOCUPATION, DatabaseConnection.TBNAME_VIVIENDAS, data);
+        } catch (ParseException ex) {
+            Logger.getLogger(SmartOcupationApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        jTextField1.setText(""); // numero expediente
+        jTextField3.setText(""); // tiempo estimado de alquiler
+        jTextField4.setText(""); // nombre cliente
+        jTextField5.setText(""); // apellidos cliente
+        jTextField6.setText(""); // telefono cliente
+        jTextField7.setText(""); // nif/dni empresa
+        jTextField8.setText(""); // nombre empresa
+        jTextField9.setText(""); // identificador vivienda
+        jTextField10.setText(""); // direccion vivienda
+        jTextField11.setText(""); // codigo postal vivienda
+        jTextField12.setText(""); // metros vivienda
+        jTextField13.setText(""); // numero de habitaciones vivienda
+        jTextField14.setText(""); // numero de baños vivienda
+        jTextField15.setText(""); // codigo referencia vivienda
+        jTextField16.setText(""); // precio vivienda
+        jTextArea1.setText(""); // observaciones vivienda
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField13KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField13KeyTyped
+        char c = evt.getKeyChar();
+        
+        // Solo permitir dígitos
+        if (!Character.isDigit(c)) { 
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField13KeyTyped
+
+    private void jTextField14KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField14KeyTyped
+        char c = evt.getKeyChar();
+        
+        // Solo permitir dígitos
+        if (!Character.isDigit(c)) { 
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField14KeyTyped
+
+    private void jTextField16KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField16KeyTyped
+        char c = evt.getKeyChar();
+        
+        // Solo permitir dígitos y comas
+        if (!Character.isDigit(c) && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField16KeyTyped
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+        char c = evt.getKeyChar();
+        
+        // Solo permitir dígitos
+        if (!Character.isDigit(c)) { 
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField3KeyTyped
+
+    private void jTextField11KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField11KeyTyped
+        char c = evt.getKeyChar();
+        
+        // Solo permitir dígitos
+        if (!Character.isDigit(c)) { 
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField11KeyTyped
+
+    private void jTextField12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyTyped
+        char c = evt.getKeyChar();
+        
+        // Solo permitir dígitos y comas
+        if (!Character.isDigit(c) && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField12KeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -564,6 +759,8 @@ public class SmartOcupationApp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
