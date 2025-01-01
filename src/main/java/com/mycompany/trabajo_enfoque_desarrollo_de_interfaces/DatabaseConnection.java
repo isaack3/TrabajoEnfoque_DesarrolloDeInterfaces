@@ -170,9 +170,8 @@ public class DatabaseConnection {
      * Método para el insertado de datos en la tabla de bases de datos previamente creada.
      * @param dbname
      * @param tbname
-     * @param data 
      */
-    public static void insertValuesDatabase(String dbname, String tbname, String[][] data) {
+    public static void insertValuesDatabase(String dbname, String tbname) {
         
     }
 }

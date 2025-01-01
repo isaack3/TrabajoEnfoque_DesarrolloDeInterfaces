@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+    </Component>
+    <Component class="com.toedter.calendar.JDayChooser" name="jDayChooser1">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -249,7 +255,6 @@
                           </Group>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jButton1" max="32767" attributes="0"/>
-                              <Component id="jTextField2" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
                               <Component id="jTextField3" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
                               <Component id="jTextField1" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
                           </Group>
@@ -267,11 +272,8 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -285,11 +287,9 @@
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="jTextField3">
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField2">
-                </Component>
                 <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Fecha de entrada a la vivienda:"/>
+                    <Property name="text" type="java.lang.String" value="Fecha entrada a la vivienda:"/>
                     <Property name="bounds" type="java.awt.Rectangle" editor="org.netbeans.beaninfo.editors.RectangleEditor">
                       <Rectangle value="[100, 20, 50, 20]"/>
                     </Property>
@@ -497,10 +497,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel17" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>

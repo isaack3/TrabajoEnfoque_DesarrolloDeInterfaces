@@ -4,6 +4,10 @@
  */
 package com.mycompany.trabajo_enfoque_desarrollo_de_interfaces;
 
+import com.toedter.calendar.JDateChooser;
+import java.awt.FlowLayout;
+import java.util.Date;
+
 /**
  *
  * @author sebastiancamposrojas
@@ -26,6 +30,8 @@ public class SmartOcupationApp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDayChooser1 = new com.toedter.calendar.JDayChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -39,7 +45,6 @@ public class SmartOcupationApp extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jTextField3 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -141,7 +146,7 @@ public class SmartOcupationApp extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
-        jLabel3.setText("Fecha de entrada a la vivienda:");
+        jLabel3.setText("Fecha entrada a la vivienda:");
         jLabel3.setBounds(new java.awt.Rectangle(100, 20, 50, 20));
 
         jLabel4.setText("Tiempo estimado de alquiler:");
@@ -172,7 +177,6 @@ public class SmartOcupationApp extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -186,10 +190,8 @@ public class SmartOcupationApp extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addGap(33, 33, 33)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -325,9 +327,7 @@ public class SmartOcupationApp extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addComponent(jLabel17)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -497,11 +497,39 @@ public class SmartOcupationApp extends javax.swing.JFrame {
         * Genero instancia de la nueva ventana a querer mostrar.
         */
         SmartOcupationAppList listado = new SmartOcupationAppList();
-
+        
         /**
-        * Aquí centro las ventanas en la pantalla.
-        */
+         * Aquí entrego medidas y centro las ventanas en la pantalla.
+         */
+        listado.setSize(767, 600);
         listado.setLocationRelativeTo(null);
+        
+        /**
+         * Aquí agrego componente JDateChooser dateChooser_inicio.
+         */
+        JDateChooser dateChooser_inicio = new JDateChooser();
+        dateChooser_inicio.setBounds(189, 105, 150, 30);
+        dateChooser_inicio.setDate(new Date());
+        // dateChooser_inicio.setVisible(true);
+        listado.add(dateChooser_inicio);
+        
+        /**
+         * Aquí agrego componente JDateChooser dateChooser_fin.
+         */
+        JDateChooser dateChooser_fin = new JDateChooser();
+        dateChooser_fin.setBounds(550, 105, 150, 30);
+        dateChooser_fin.setDate(new Date());
+        // dateChooser_fin.setVisible(true);
+        listado.add(dateChooser_fin);
+        
+        /**
+         * Aquí nos aseguramos de actualizar el contenedor 
+         * y no tener problemas de componentes no visibles como el JDateChooser.
+         */
+        listado.revalidate();
+        listado.repaint();
+        
+        // listado.setLayout(null);
 
         /**
         * Aquí le obligo a mostrar la ventana.
@@ -519,6 +547,8 @@ public class SmartOcupationApp extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDayChooser jDayChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -558,7 +588,6 @@ public class SmartOcupationApp extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
