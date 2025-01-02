@@ -5,10 +5,14 @@
 package com.mycompany.trabajo_enfoque_desarrollo_de_interfaces;
 
 import com.toedter.calendar.JDateChooser;
+import java.awt.BorderLayout;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -571,6 +575,34 @@ public class SmartOcupationApp extends javax.swing.JFrame {
          */
         listado.setSize(767, 600);
         listado.setLocationRelativeTo(null);
+        
+        /**
+         * Aquí agrego componente JTable.
+         */
+        JTable table = new JTable();
+        // table.setBounds(550, 105, 500, 500);
+        DefaultTableModel model = new DefaultTableModel();
+        table.setModel(model);
+        
+        /**
+         * Ahora configuro el nombre de las columnas.
+         */
+        model.addColumn("ID");
+        model.addColumn("Cliente Nombre");
+        model.addColumn("Cliente Apellidos");
+        model.addColumn("Vivienda Precio");
+        
+        /**
+         * Obtengo los datos desde base de datos.
+         */
+        DatabaseConnection db = new DatabaseConnection();
+        db.loadDataToTable(model, DatabaseConnection.DBNAME_SMARTOCUPATION, DatabaseConnection.TBNAME_VIVIENDAS);
+        
+        /**
+         * Aquí agrego un scroll para poder tenerlo preparado cuando el listado crezca.
+         */
+        JScrollPane scrollPane = new JScrollPane(table);
+        listado.add(scrollPane, BorderLayout.CENTER);
 
         /**
         * Aquí le obligo a mostrar la ventana.

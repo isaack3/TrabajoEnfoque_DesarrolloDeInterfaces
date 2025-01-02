@@ -6,6 +6,7 @@ package com.mycompany.trabajo_enfoque_desarrollo_de_interfaces;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
@@ -13,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -271,6 +273,86 @@ public class DatabaseConnection {
             * Se encapsula el proceso con try/catch para evitar errores no controlados.
             */
             try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                System.err.println("Error al cerrar conexión de bases de datos: " + e.getMessage());
+            }
+        }
+    }
+    
+    /**
+     * Método para el mostrado de datos en el componente de tabla.
+     * @param model
+     * @param dbname
+     * @param tbname
+     */
+    public void loadDataToTable(DefaultTableModel model, String dbname, String tbname) {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        /**
+         * Se encapsula el proceso con try/catch para evitar errores no controlados.
+         */
+        try {
+            conn = getConnection();
+            stmt = conn.createStatement();
+            
+            /**
+             * Seleccionado de base de datos.
+             */
+            selectDatabase(dbname, conn, stmt);
+            
+            /**
+             * Se define la consulta de datos.
+             */
+            String sql = "SELECT * FROM " + dbname + "." + tbname;
+            
+            /**
+             * Ejecutado de la sentencia sql.
+             */
+            rs = stmt.executeQuery(sql);
+            
+            /**
+             * Realizo verificado, si es que trae datos la consulta sql.
+             */
+            if (!rs.isBeforeFirst()) {
+                System.out.println("No se encontraron resultados en la base de datos.");
+            }
+            
+            /**
+             * Limpio el modelo antes de agregar nuevas filas.
+             */
+            model.setRowCount(0);
+            
+            /**
+             * Recorrer el ResultSet y agregar los datos al modelo de tabla.
+             */
+            while (rs.next()) {
+                Object[] row = new Object[4];
+                row[0] = rs.getInt("ID");  // tipo de dato bd : int
+                row[1] = rs.getString("CLIENTE_NOMBRE"); // tipo de dato bd : varchar
+                row[2] = rs.getString("CLIENTE_APELLIDOS"); // tipo de dato bd : varchar
+                row[3] = rs.getDouble("VIVIENDA_PRECIO"); // tipo de dato bd : double
+                
+                /**
+                 * Aquí agrego la fila al modelo Tabla.
+                 */
+                model.addRow(row);
+                
+                System.out.println(row);
+            }
+            // System.out.println(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            
+            /**
+            * Se encapsula el proceso con try/catch para evitar errores no controlados.
+            */
+            try {
+                if (rs != null) rs.close();
                 if (stmt != null) stmt.close();
                 if (conn != null) conn.close();
             } catch (SQLException e) {
